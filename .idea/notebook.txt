@@ -1,0 +1,44 @@
+#安装 cd PYTHONPATH\Scripts路径下
+easy_install django
+
+#创建项目django-admin.py(linux)
+django-admin startproject mysite
+
+#创建应用程序，需在manage.py目录下
+python manage.py startapp books
+
+#激活应用(有的版本不需要项目前缀)
+添加books配置文件setting.py的INSTALLED_APPS中
+
+#验证模型的有效性
+#python manage.py validate
+python manage.py check
+python manage.py makemigrations books    #用来检测数据库变更和生成数据库迁移文件
+python manage.py migrate     #用来迁移数据库
+python manage.py sqlmigrate books 0001 # 用来把数据库迁移文件转换成数据库语言
+
+#更新数据重复这两步
+{
+#python代码生成sql语句（命令并没有在数据库中真正创建数据表）
+#python manage.py sqlall books
+python manage.py makemigrations books
+
+#提交sql语句至数据库
+python manage.py syncdb
+python manage.py migrate
+}
+#配置数据库
+pip install pymysql
+在__init__.py中添加以下代码
+import pymysql
+pymysql.install_as_MySQLdb()
+
+#创建超级管理员
+python manage.py createsuperuser
+usr:freax
+pwd:freax
+eamil:qq.com
+
+#启动
+python manage.py runserver
+#登陆  127.0.0.1:8000/admin/login
